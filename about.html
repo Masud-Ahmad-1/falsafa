@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>পরিচয় — ফলসফা</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&family=Hind+Siliguri:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F4EEDD;--paper-deep:#ECE3CC;--ink:#221E18;--ink-soft:#5B5142;--line:#CDBE9A;--gold:#9C7A3C;--maroon:#7A2E2E;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:'Hind Siliguri',sans-serif;}
+body{background-image:radial-gradient(ellipse at top left,rgba(156,122,60,.06),transparent 55%),radial-gradient(ellipse at bottom right,rgba(122,46,46,.05),transparent 55%);}
+.spine{position:fixed;top:0;left:0;width:14px;height:100%;background:linear-gradient(180deg,var(--maroon),#5e2222 60%,var(--maroon));box-shadow:2px 0 6px rgba(0,0,0,.15) inset;z-index:10;}
+@media(max-width:640px){.spine{width:8px;}}
+.topbar{position:sticky;top:0;z-index:9;background:var(--paper-deep);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 40px 0 72px;height:48px;gap:16px;}
+@media(max-width:640px){.topbar{padding:0 16px 0 28px;}}
+.topbar-brand{font-family:'Tiro Bangla',serif;font-size:18px;color:var(--maroon);text-decoration:none;}
+.topbar-links{display:flex;gap:20px;align-items:center;}
+.topbar-links a{font-size:13px;color:var(--ink-soft);text-decoration:none;letter-spacing:.03em;border-bottom:1px dotted transparent;transition:color .15s,border-color .15s;}
+.topbar-links a:hover,.topbar-links a.active{color:var(--maroon);border-bottom-color:var(--maroon);}
+.topbar-search a{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--ink-soft);text-decoration:none;padding:4px 10px;border:1px solid var(--line);border-radius:20px;background:var(--paper);transition:background .15s;}
+.topbar-search a:hover{background:var(--line);}
+.page{max-width:720px;margin:0 auto;padding:54px 40px 80px 64px;}
+@media(max-width:640px){.page{padding:32px 22px 60px 32px;}}
+.catalog-row{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:48px;font-size:13px;letter-spacing:.04em;color:var(--ink-soft);}
+.art-eyebrow{font-size:13px;letter-spacing:.18em;color:var(--gold);margin-bottom:14px;}
+h1{font-family:'Tiro Bangla',serif;font-size:clamp(38px,7vw,58px);line-height:1.1;font-weight:400;margin:0 0 18px;}
+.subtitle{font-family:'Tiro Bangla',serif;font-style:italic;font-size:19px;color:var(--maroon);margin:0 0 36px;}
+.art-header{border-bottom:1px dashed var(--line);padding-bottom:36px;margin-bottom:40px;}
+.lede{font-size:18px;line-height:1.95;color:var(--ink);margin-bottom:14px;}
+.lede::first-letter{font-family:'Tiro Bangla',serif;font-size:58px;float:left;line-height:.8;padding:8px 10px 0 0;color:var(--maroon);}
+p{font-size:16.5px;line-height:1.9;color:var(--ink-soft);margin:0 0 22px;}
+h2{font-family:'Tiro Bangla',serif;font-weight:400;font-size:27px;color:var(--ink);margin:48px 0 16px;padding-top:6px;border-top:1px solid var(--line);}
+blockquote{margin:36px 0;padding:4px 0 4px 22px;border-left:3px solid var(--maroon);font-family:'Tiro Bangla',serif;font-style:italic;font-size:19px;color:var(--ink);}
+.values{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:24px 0;}
+.value-card{background:var(--paper-deep);border:1px solid var(--line);border-radius:2px;padding:18px 16px;}
+.value-card .vc-title{font-family:'Tiro Bangla',serif;font-size:19px;color:var(--maroon);margin-bottom:8px;}
+.value-card p{font-size:14.5px;margin:0;line-height:1.75;}
+.cta-box{background:var(--paper-deep);border:1px solid var(--line);border-radius:2px;padding:22px 24px;margin-top:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.cta-box p{margin:0;font-size:15.5px;color:var(--ink-soft);}
+.cta-btn{display:inline-block;padding:10px 22px;background:var(--maroon);color:var(--paper);text-decoration:none;font-size:14px;border-radius:2px;transition:opacity .15s;}
+.cta-btn:hover{opacity:.85;}
+footer{border-top:1px solid var(--line);padding-top:20px;margin-top:52px;font-size:13px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+footer a{color:var(--maroon);text-decoration:none;border-bottom:1px dotted var(--maroon);}
+.mark{font-family:'Tiro Bangla',serif;font-style:italic;color:var(--gold);}
+</style>
+</head>
+<body>
+<div class="spine" aria-hidden="true"></div>
+<header class="topbar">
+  <a class="topbar-brand" href="index.html">ফলসফা</a>
+  <nav class="topbar-links">
+    <a href="index.html">সূচি</a>
+    <a href="about.html" class="active">পরিচয়</a>
+  </nav>
+  <div class="topbar-search">
+    <a href="search.html">🔍 খুঁজুন</a>
+  </div>
+</header>
+
+<main class="page">
+  <div class="catalog-row">
+    <span>ফলসফা গ্রন্থাগার</span>
+    <span>পরিচয়পত্র</span>
+  </div>
+
+  <header class="art-header">
+    <p class="art-eyebrow">ফলসফা সম্পর্কে</p>
+    <h1>এই গ্রন্থাগার কেন?</h1>
+    <p class="subtitle">একটি প্রশ্ন থেকে জন্ম নেওয়া উদ্যোগ</p>
+  </header>
+
+  <p class="lede">
+    ফলসফা একটি প্রশ্ন থেকে জন্ম নিয়েছে: বিভিন্ন বিষয়ের সবচেয়ে মৌলিক ধারণাগুলো যদি
+    একসাথে, সহজ ভাষায়, বাংলায় পাওয়া যেত — তাহলে কেমন হতো?
+  </p>
+
+  <p>
+    স্কুলের পাঠ্যবই আমাদের তথ্য দেয়, কিন্তু প্রায়ই প্রেক্ষাপট দেয় না। বিশ্ববিদ্যালয়ের কোর্স
+    গভীর যায়, কিন্তু প্রায়ই বিস্তার হারায়। ইন্টারনেটে তথ্য অফুরন্ত, কিন্তু বিশ্বস্ততার মানদণ্ড
+    অস্পষ্ট। ফলসফা এই তিনটি সমস্যার মাঝামাঝি একটা জায়গা খোঁজার চেষ্টা।
+  </p>
+
+  <blockquote>
+    জ্ঞানের গোড়া না বুঝলে ডালপালা বোঝা যায় না।
+  </blockquote>
+
+  <h2>আমরা কী করতে চাই</h2>
+  <div class="values">
+    <div class="value-card">
+      <div class="vc-title">মূল থেকে শুরু</div>
+      <p>প্রতিটি বিষয়ের সবচেয়ে গোড়ার প্রশ্ন ও উত্তর দিয়ে শুরু করা — শাখা-প্রশাখায় যাওয়ার আগে।</p>
+    </div>
+    <div class="value-card">
+      <div class="vc-title">সহজ ভাষা</div>
+      <p>পরিভাষা যখন দরকার তখনই, বাকি সময় সহজ বাংলায় বলা — পাণ্ডিত্য প্রদর্শন নয়।</p>
+    </div>
+    <div class="value-card">
+      <div class="vc-title">সংযোগ</div>
+      <p>দর্শন, বিজ্ঞান, ইতিহাস — এগুলো আলাদা নয়। এদের মধ্যকার সূত্রগুলো খোঁজা।</p>
+    </div>
+    <div class="value-card">
+      <div class="vc-title">বাংলায়</div>
+      <p>জ্ঞানচর্চা শুধু ইংরেজিতে নয় — মাতৃভাষায় চিন্তা করার অধিকার ও অভ্যাস গড়ে তোলা।</p>
+    </div>
+  </div>
+
+  <h2>কীভাবে গড়ে উঠছে</h2>
+  <p>
+    ফলসফা এখন ছয়টি মূল শাখায় ভাগ — দর্শন, বিজ্ঞান, ইতিহাস, ধর্ম ও নীতি, ভাষা, এবং
+    শিল্প ও সংস্কৃতি। প্রতিটি শাখার ভেতরে আরও নির্দিষ্ট বিষয়ে পেজ তৈরি হচ্ছে। এটি একটি
+    ক্রমবর্ধমান সংগ্রহ — একটি পুরোনো গ্রন্থাগারের মতোই, ধীরে ধীরে ভরে উঠবে।
+  </p>
+  <p>
+    এখানে যা লেখা আছে তা চূড়ান্ত নয়, অভ্রান্ত নয়। এটি একটি চলমান প্রচেষ্টা — ভুল
+    থাকলে সংশোধন হবে, অসম্পূর্ণ থাকলে পূর্ণ হবে।
+  </p>
+
+  <div class="cta-box">
+    <p>পড়া শুরু করতে প্রস্তুত?</p>
+    <a href="index.html" class="cta-btn">সূচিতে যান →</a>
+  </div>
+
+  <footer>
+    <span><span class="mark">ফলসফা</span> — জ্ঞানের গোড়াপত্তন</span>
+    <span>© ২০২৬</span>
+  </footer>
+</main>
+</body>
+</html>
