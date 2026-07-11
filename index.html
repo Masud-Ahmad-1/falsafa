@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ফলসফা — সবকিছুর মূল জ্ঞান</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&family=Hind+Siliguri:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4EEDD; --paper-deep:#ECE3CC; --ink:#221E18;
+    --ink-soft:#5B5142; --line:#CDBE9A; --gold:#9C7A3C; --maroon:#7A2E2E;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:var(--paper); color:var(--ink); font-family:'Hind Siliguri',sans-serif; }
+  body{ background-image:radial-gradient(ellipse at top left,rgba(156,122,60,.06),transparent 55%),radial-gradient(ellipse at bottom right,rgba(122,46,46,.05),transparent 55%); }
+
+  .topbar{ position:sticky; top:0; z-index:20; background:var(--paper-deep); border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; padding:0 40px 0 72px; height:48px; gap:16px; }
+  @media(max-width:640px){ .topbar{ padding:0 16px 0 28px; } }
+  .topbar-brand{ font-family:'Tiro Bangla',serif; font-size:18px; color:var(--maroon); text-decoration:none; }
+  .topbar-links{ display:flex; gap:20px; }
+  .topbar-links a{ font-size:13px; color:var(--ink-soft); text-decoration:none; letter-spacing:.03em; border-bottom:1px dotted transparent; transition:color .15s,border-color .15s; }
+  .topbar-links a:hover{ color:var(--maroon); border-bottom-color:var(--maroon); }
+  .topbar-search a{ display:flex; align-items:center; gap:4px; font-size:13px; color:var(--ink-soft); text-decoration:none; padding:4px 10px; border:1px solid var(--line); border-radius:20px; background:var(--paper); transition:background .15s; }
+  .topbar-search a:hover{ background:var(--line); }
+
+  .spine{ position:fixed; top:0; left:0; width:14px; height:100%; background:linear-gradient(180deg,var(--maroon),#5e2222 60%,var(--maroon)); box-shadow:2px 0 6px rgba(0,0,0,.15) inset; z-index:10; }
+  @media(max-width:640px){ .spine{ width:8px; } }
+
+  .page{ max-width:880px; margin:0 auto; padding:52px 40px 80px 64px; }
+  @media(max-width:640px){ .page{ padding:32px 22px 60px 36px; } }
+
+  .catalog-row{ display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:32px; font-size:13px; letter-spacing:.04em; color:var(--ink-soft); }
+  .catalog-row span.no{ border:1px solid var(--line); padding:3px 10px; border-radius:2px; background:var(--paper-deep); }
+
+  .featured{ background:var(--paper-deep); border:1px solid var(--line); border-radius:2px; padding:22px 24px; margin-bottom:44px; position:relative; overflow:hidden; }
+  .featured::before{ content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--maroon); }
+  .feat-label{ font-size:11.5px; letter-spacing:.16em; color:var(--gold); margin:0 0 7px; }
+  .feat-title{ font-family:'Tiro Bangla',serif; font-size:24px; color:var(--ink); margin:0 0 7px; }
+  .feat-desc{ font-size:14.5px; line-height:1.8; color:var(--ink-soft); margin:0 0 14px; }
+  .feat-link{ font-size:13px; color:var(--maroon); text-decoration:none; border-bottom:1px dotted var(--maroon); }
+  .feat-link:hover{ opacity:.75; }
+
+  .hero{ position:relative; padding-bottom:48px; margin-bottom:44px; border-bottom:1px dashed var(--line); }
+  .eyebrow{ font-size:14px; letter-spacing:.18em; color:var(--gold); margin-bottom:18px; font-weight:500; }
+  h1{ font-family:'Tiro Bangla',serif; font-size:clamp(48px,9vw,92px); line-height:1.05; margin:0 0 22px; font-weight:400; color:var(--ink); }
+  .tagline{ font-family:'Tiro Bangla',serif; font-style:italic; font-size:clamp(20px,3vw,26px); color:var(--maroon); margin:0 0 28px; }
+  .lede{ max-width:58ch; font-size:17px; line-height:1.9; color:var(--ink-soft); }
+  .lede strong{ color:var(--ink); font-weight:600; }
+
+  .stamp{ position:absolute; top:-6px; right:0; width:128px; height:128px; border-radius:50%; border:2px solid var(--maroon); display:flex; align-items:center; justify-content:center; transform:rotate(-9deg); opacity:.92; }
+  @media(max-width:640px){ .stamp{ display:none; } }
+  .stamp::before{ content:""; position:absolute; inset:8px; border:1px solid var(--maroon); border-radius:50%; }
+  .stamp svg{ width:100%; height:100%; }
+  .stamp text{ font-family:'Hind Siliguri',sans-serif; font-size:9.2px; letter-spacing:2px; fill:var(--maroon); }
+  .stamp .center-mark{ position:absolute; font-family:'Tiro Bangla',serif; font-size:26px; color:var(--maroon); }
+
+  .section-label{ font-size:13px; letter-spacing:.14em; color:var(--ink-soft); margin-bottom:20px; display:flex; align-items:center; gap:12px; }
+  .section-label::after{ content:""; flex:1; height:1px; background:var(--line); }
+
+  /* কার্ড গ্রিড */
+  .catalog{ display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:16px; margin-bottom:64px; }
+
+  /* card-wrapper: <a.card> + .card-subs আলাদা রাখে, nested anchor এড়ায় */
+  .card-wrapper{ display:flex; flex-direction:column; }
+  .card-wrapper:hover .card{ transform:translateY(-2px); box-shadow:0 6px 16px rgba(34,30,24,.1); }
+
+  a.card{ text-decoration:none; color:inherit; background:var(--paper-deep); border:1px solid var(--line); border-radius:2px 2px 0 0; border-bottom:none; padding:18px 16px 14px; display:flex; flex-direction:column; gap:4px; transition:transform .15s,box-shadow .15s; }
+  .card .tag-no{ font-size:11px; color:var(--gold); letter-spacing:.08em; }
+  .card h3{ font-family:'Tiro Bangla',serif; font-weight:400; font-size:21px; margin:6px 0 0; color:var(--ink); }
+  .card .soon{ font-size:11.5px; color:var(--ink-soft); border-top:1px dashed var(--line); padding-top:8px; margin-top:8px; letter-spacing:.04em; }
+
+  .card-subs{ background:var(--paper); border:1px solid var(--line); border-top:1px dashed var(--line); border-radius:0 0 2px 2px; padding:8px 12px; display:flex; flex-wrap:wrap; gap:6px; }
+  .card-sub{ font-size:11.5px; color:var(--maroon); text-decoration:none; border:1px dotted var(--maroon); padding:2px 8px; border-radius:20px; transition:background .12s; }
+  .card-sub:hover{ background:rgba(122,46,46,.1); }
+
+  footer{ border-top:1px solid var(--line); padding-top:22px; font-size:13px; color:var(--ink-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+  footer .mark{ font-family:'Tiro Bangla',serif; font-style:italic; color:var(--gold); }
+  @media(prefers-reduced-motion:reduce){ a.card{ transition:none; } }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="topbar-brand" href="index.html">ফলসফা</a>
+  <nav class="topbar-links">
+    <a href="index.html">সূচি</a>
+    <a href="about.html">পরিচয়</a>
+  </nav>
+  <div class="topbar-search">
+    <a href="search.html">🔍 খুঁজুন</a>
+  </div>
+</header>
+
+<div class="spine" aria-hidden="true"></div>
+
+<main class="page">
+
+  <div class="catalog-row">
+    <span>ফলসফা গ্রন্থাগার</span>
+    <span class="no">সূচি নং ০০১</span>
+  </div>
+
+  <div class="featured">
+    <p class="feat-label">আজকের পাঠ</p>
+    <p class="feat-title">সক্রেটিস — প্রশ্নের জনক</p>
+    <p class="feat-desc">সক্রেটিস কোনো গ্রন্থ লেখেননি, তবু পশ্চিমা দর্শনের সবচেয়ে প্রভাবশালী চরিত্র। তাঁর অস্ত্র ছিল একটাই — প্রশ্ন।</p>
+    <a href="sokrates.html" class="feat-link">পড়তে শুরু করুন →</a>
+  </div>
+
+  <section class="hero">
+    <div class="stamp" aria-hidden="true">
+      <svg viewBox="0 0 130 130">
+        <defs>
+          <path id="circlePath" d="M 65,65 m -48,0 a 48,48 0 1,1 96,0 a 48,48 0 1,1 -96,0"/>
+        </defs>
+        <text><textPath href="#circlePath" startOffset="2%">প্রতিষ্ঠাকাল ২০২৬ · ফলসফা · জ্ঞানভাণ্ডার ·</textPath></text>
+      </svg>
+      <span class="center-mark">ফ</span>
+    </div>
+    <p class="eyebrow">ফলসফা / Falsafa</p>
+    <h1>সবকিছুর<br>মূল জ্ঞান</h1>
+    <p class="tagline">যা জানা প্রয়োজন, তার গোড়ার কথা</p>
+    <p class="lede">
+      ফলসফা একটি ক্রমবর্ধমান জ্ঞানভাণ্ডার — যেখানে দর্শন, বিজ্ঞান, ইতিহাস, ভাষা ও জীবনের
+      নানা শাখার <strong>মূল ও মৌলিক বিষয়গুলো</strong> সহজ ও নির্ভরযোগ্যভাবে তুলে ধরার চেষ্টা
+      করা হবে। একটি গ্রন্থাগারের মতোই, ধীরে ধীরে গড়ে উঠবে এর সংগ্রহ।
+    </p>
+  </section>
+
+  <p class="section-label">জ্ঞানের শাখাসমূহ</p>
+
+  <div class="catalog">
+
+    <div class="card-wrapper">
+      <a class="card" href="darshan.html">
+        <span class="tag-no">শাখা ০১</span>
+        <h3>দর্শন</h3>
+        <span class="soon">পড়ুন →</span>
+      </a>
+      <div class="card-subs">
+        <a href="sokrates.html" class="card-sub">সক্রেটিস</a>
+        <a href="islami-darshan.html" class="card-sub">ইসলামি দর্শন</a>
+      </div>
+    </div>
+
+    <div class="card-wrapper">
+      <a class="card" href="biggan.html">
+        <span class="tag-no">শাখা ০২</span>
+        <h3>বিজ্ঞান</h3>
+        <span class="soon">পড়ুন →</span>
+      </a>
+      <div class="card-subs">
+        <a href="baigyanik-poddhoti.html" class="card-sub">বৈজ্ঞানিক পদ্ধতি</a>
+      </div>
+    </div>
+
+    <div class="card-wrapper">
+      <a class="card" href="itihash.html">
+        <span class="tag-no">শাখা ০৩</span>
+        <h3>ইতিহাস</h3>
+        <span class="soon">পড়ুন →</span>
+      </a>
+      <div class="card-subs">
+        <a href="shobhyotar-utso.html" class="card-sub">সভ্যতার উৎস</a>
+      </div>
+    </div>
+
+    <div class="card-wrapper">
+      <a class="card" href="dhormo-niti.html">
+        <span class="tag-no">শাখা ০৪</span>
+        <h3>ধর্ম ও নীতি</h3>
+        <span class="soon">পড়ুন →</span>
+      </a>
+      <div class="card-subs">
+        <a href="islami-akida.html" class="card-sub">ইসলামের মূল বিশ্বাস</a>
+      </div>
+    </div>
+
+    <div class="card-wrapper">
+      <a class="card" href="bhasha.html">
+        <span class="tag-no">শাখা ০৫</span>
+        <h3>ভাষা</h3>
+        <span class="soon">পড়ুন →</span>
+      </a>
+      <div class="card-subs">
+        <a href="bangla-vasha.html" class="card-sub">বাংলা ভাষা</a>
+      </div>
+    </div>
+
+    <div class="card-wrapper">
+      <a class="card" href="shilpo.html">
+        <span class="tag-no">শাখা ০৬</span>
+        <h3>শিল্প ও সংস্কৃতি</h3>
+        <span class="soon">পড়ুন →</span>
+      </a>
+      <div class="card-subs">
+        <a href="bangla-shahitto.html" class="card-sub">বাংলা সাহিত্য</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span><span class="mark">ফলসফা</span> — জ্ঞানের গোড়াপত্তন</span>
+    <span>© ২০২৬</span>
+  </footer>
+
+</main>
+</body>
+</html>
