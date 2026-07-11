@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>খুঁজুন — ফলসফা</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&family=Hind+Siliguri:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F4EEDD;--paper-deep:#ECE3CC;--ink:#221E18;--ink-soft:#5B5142;--line:#CDBE9A;--gold:#9C7A3C;--maroon:#7A2E2E;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:'Hind Siliguri',sans-serif;}
+body{background-image:radial-gradient(ellipse at top left,rgba(156,122,60,.06),transparent 55%),radial-gradient(ellipse at bottom right,rgba(122,46,46,.05),transparent 55%);}
+.spine{position:fixed;top:0;left:0;width:14px;height:100%;background:linear-gradient(180deg,var(--maroon),#5e2222 60%,var(--maroon));box-shadow:2px 0 6px rgba(0,0,0,.15) inset;z-index:10;}
+@media(max-width:640px){.spine{width:8px;}}
+.topbar{position:sticky;top:0;z-index:9;background:var(--paper-deep);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 40px 0 72px;height:48px;gap:16px;}
+@media(max-width:640px){.topbar{padding:0 16px 0 28px;}}
+.topbar-brand{font-family:'Tiro Bangla',serif;font-size:18px;color:var(--maroon);text-decoration:none;}
+.topbar-links{display:flex;gap:20px;}
+.topbar-links a{font-size:13px;color:var(--ink-soft);text-decoration:none;letter-spacing:.03em;border-bottom:1px dotted transparent;transition:color .15s,border-color .15s;}
+.topbar-links a:hover,.topbar-links a.active{color:var(--maroon);border-bottom-color:var(--maroon);}
+.topbar-search a{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--maroon);text-decoration:none;padding:4px 10px;border:1px solid var(--maroon);border-radius:20px;background:rgba(122,46,46,.07);}
+.page{max-width:720px;margin:0 auto;padding:50px 40px 80px 64px;}
+@media(max-width:640px){.page{padding:32px 22px 60px 32px;}}
+.catalog-row{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:36px;font-size:13px;letter-spacing:.04em;color:var(--ink-soft);}
+h1{font-family:'Tiro Bangla',serif;font-size:clamp(34px,6vw,50px);font-weight:400;margin:0 0 28px;}
+/* search box */
+.search-wrap{position:relative;margin-bottom:32px;}
+.search-wrap input{width:100%;padding:14px 18px 14px 46px;font-family:'Hind Siliguri',sans-serif;font-size:17px;background:var(--paper-deep);border:1px solid var(--line);border-radius:3px;color:var(--ink);outline:none;transition:border-color .15s;}
+.search-wrap input:focus{border-color:var(--maroon);}
+.search-wrap input::placeholder{color:var(--ink-soft);}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;pointer-events:none;}
+/* results */
+#results{margin-top:4px;}
+.result-item{display:block;padding:16px 18px;background:var(--paper-deep);border:1px solid var(--line);border-radius:2px;margin-bottom:10px;text-decoration:none;color:var(--ink);transition:background .15s,transform .12s;}
+.result-item:hover{background:var(--line);transform:translateX(4px);}
+.ri-meta{font-size:11.5px;color:var(--gold);letter-spacing:.08em;margin-bottom:4px;}
+.ri-title{font-family:'Tiro Bangla',serif;font-size:20px;margin-bottom:4px;}
+.ri-desc{font-size:14px;color:var(--ink-soft);line-height:1.7;}
+.ri-match{background:rgba(156,122,60,.22);border-radius:2px;padding:0 2px;}
+.empty{font-size:16px;color:var(--ink-soft);padding:20px 0;}
+/* category browse */
+.browse-label{font-size:13px;letter-spacing:.12em;color:var(--ink-soft);margin:36px 0 14px;padding-top:24px;border-top:1px solid var(--line);}
+.browse-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.br-card{display:block;padding:14px 16px;background:var(--paper-deep);border:1px solid var(--line);border-radius:2px;text-decoration:none;color:var(--ink);transition:background .15s,transform .12s;}
+.br-card:hover{background:var(--line);transform:translateY(-2px);}
+.br-no{font-size:11px;color:var(--gold);letter-spacing:.06em;display:block;margin-bottom:4px;}
+.br-name{font-family:'Tiro Bangla',serif;font-size:18px;display:block;}
+.br-count{font-size:12px;color:var(--ink-soft);margin-top:4px;}
+footer{border-top:1px solid var(--line);padding-top:20px;margin-top:52px;font-size:13px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+footer a{color:var(--maroon);text-decoration:none;border-bottom:1px dotted var(--maroon);}
+.mark{font-family:'Tiro Bangla',serif;font-style:italic;color:var(--gold);}
+</style>
+</head>
+<body>
+<div class="spine" aria-hidden="true"></div>
+<header class="topbar">
+  <a class="topbar-brand" href="index.html">ফলসফা</a>
+  <nav class="topbar-links">
+    <a href="index.html">সূচি</a>
+    <a href="about.html">পরিচয়</a>
+  </nav>
+  <div class="topbar-search">
+    <a href="search.html">🔍 খুঁজুন</a>
+  </div>
+</header>
+
+<main class="page">
+  <div class="catalog-row">
+    <span>ফলসফা গ্রন্থাগার</span>
+    <span>অনুসন্ধান</span>
+  </div>
+
+  <h1>কী খুঁজছেন?</h1>
+
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="বিষয়, ধারণা বা নাম লিখুন…" autofocus autocomplete="off">
+  </div>
+
+  <div id="results"></div>
+
+  <p class="browse-label">শাখা অনুযায়ী ব্রাউজ করুন</p>
+  <div class="browse-grid">
+    <a href="darshan.html" class="br-card"><span class="br-no">০১</span><span class="br-name">দর্শন</span><span class="br-count">২টি উপ-বিষয়</span></a>
+    <a href="biggan.html" class="br-card"><span class="br-no">০২</span><span class="br-name">বিজ্ঞান</span><span class="br-count">১টি উপ-বিষয়</span></a>
+    <a href="itihash.html" class="br-card"><span class="br-no">০৩</span><span class="br-name">ইতিহাস</span><span class="br-count">১টি উপ-বিষয়</span></a>
+    <a href="dhormo-niti.html" class="br-card"><span class="br-no">০৪</span><span class="br-name">ধর্ম ও নীতি</span><span class="br-count">১টি উপ-বিষয়</span></a>
+    <a href="bhasha.html" class="br-card"><span class="br-no">০৫</span><span class="br-name">ভাষা</span><span class="br-count">১টি উপ-বিষয়</span></a>
+    <a href="shilpo.html" class="br-card"><span class="br-no">০৬</span><span class="br-name">শিল্প ও সংস্কৃতি</span><span class="br-count">১টি উপ-বিষয়</span></a>
+  </div>
+
+  <footer>
+    <span><span class="mark">ফলসফা</span> — জ্ঞানের গোড়াপত্তন</span>
+    <a href="index.html">← সূচিতে ফিরুন</a>
+  </footer>
+</main>
+
+<script>
+const INDEX = [
+  {url:"falsafa.html", cat:"সূচি", title:"ফলসফা — সবকিছুর মূল জ্ঞান", desc:"ফলসফা একটি ক্রমবর্ধমান জ্ঞানভাণ্ডার — দর্শন, বিজ্ঞান, ইতিহাস, ধর্ম, ভাষা ও শিল্পের মূল বিষয়গুলো বাংলায়।", tags:"falsafa জ্ঞান মূল সবকিছু গ্রন্থাগার"},
+  {url:"about.html", cat:"পরিচয়", title:"ফলসফা সম্পর্কে", desc:"ফলসফা কেন তৈরি হয়েছে, কীভাবে গড়ে উঠছে এবং এর লক্ষ্য কী।", tags:"পরিচয় about লক্ষ্য উদ্দেশ্য"},
+  // শাখা
+  {url:"darshan.html", cat:"শাখা ০১", title:"দর্শন", desc:"কেন প্রশ্ন করা মানুষের প্রথম কাজ। অধিবিদ্যা, জ্ঞানতত্ত্ব, নীতিশাস্ত্র, যুক্তিবিদ্যা।", tags:"দর্শন philosophy প্রশ্ন সক্রেটিস প্লেটো অ্যারিস্টটল যুক্তি নীতি জ্ঞান"},
+  {url:"biggan.html", cat:"শাখা ০২", title:"বিজ্ঞান", desc:"প্রশ্ন থেকে প্রমাণে পৌঁছানোর পথ। পদার্থবিজ্ঞান, রসায়ন, জীববিজ্ঞান।", tags:"বিজ্ঞান science পদার্থ রসায়ন জীববিজ্ঞান পরীক্ষা প্রমাণ তত্ত্ব গণিত"},
+  {url:"itihash.html", cat:"শাখা ০৩", title:"ইতিহাস", desc:"অতীতকে বোঝার শৃঙ্খলা। প্রত্নতত্ত্ব, রাজনৈতিক ও সামাজিক ইতিহাস।", tags:"ইতিহাস history অতীত সভ্যতা প্রত্নতত্ত্ব সমাজ"},
+  {url:"dhormo-niti.html", cat:"শাখা ০৪", title:"ধর্ম ও নীতি", desc:"বিশ্বাস আর আচরণের মেলবন্ধন। তুলনামূলক ধর্মতত্ত্ব, নীতিদর্শন।", tags:"ধর্ম নীতি religion ethics ইসলাম বৌদ্ধ হিন্দু খ্রিস্টান আধ্যাত্মিকতা"},
+  {url:"bhasha.html", cat:"শাখা ০৫", title:"ভাষা", desc:"চিন্তার ঘর, সংযোগের সেতু। ধ্বনিবিজ্ঞান, অর্থতত্ত্ব, সমাজভাষাবিজ্ঞান।", tags:"ভাষা language linguistics বাংলা সংস্কৃত ব্যাকরণ শব্দ"},
+  {url:"shilpo.html", cat:"শাখা ০৬", title:"শিল্প ও সংস্কৃতি", desc:"মানুষের নিজেকে প্রকাশ করার শিল্প। সাহিত্য, সংগীত, চলচ্চিত্র।", tags:"শিল্প সংস্কৃতি art culture সাহিত্য সংগীত নাটক চলচ্চিত্র"},
+  // সাব-টপিক
+  {url:"sokrates.html", cat:"দর্শন · উপ-বিষয়", title:"সক্রেটিস", desc:"প্রশ্নের জনক। ডায়ালেকটিক, সক্রেটিক ইরনি, আত্মজ্ঞান। এথেন্স, হেমলক।", tags:"সক্রেটিস socrates এথেন্স প্রশ্ন দর্শন গ্রিক ডায়ালেকটিক"},
+  {url:"islami-darshan.html", cat:"দর্শন · উপ-বিষয়", title:"ইসলামি দর্শন", desc:"বিশ্বাস ও যুক্তির সংলাপ। ইবনে সিনা, আল-ফারাবি, ইবনে রুশদ।", tags:"ইসলামি দর্শন islamic philosophy ইবনে সিনা আল-গাজ্জালি ইবনে রুশদ বায়তুল হিকমা"},
+  {url:"baigyanik-poddhoti.html", cat:"বিজ্ঞান · উপ-বিষয়", title:"বৈজ্ঞানিক পদ্ধতি", desc:"সত্য যাচাইয়ের কাঠামো। পর্যবেক্ষণ, অনুকল্প, পরীক্ষা, মিথ্যাপ্রমাণযোগ্যতা।", tags:"বৈজ্ঞানিক পদ্ধতি scientific method পরীক্ষা অনুকল্প গ্যালিলিও বেকন"},
+  {url:"shobhyotar-utso.html", cat:"ইতিহাস · উপ-বিষয়", title:"সভ্যতার উৎস", desc:"মানবজাতির প্রথম অধ্যায়। মেসোপটেমিয়া, মিশর, সিন্ধু উপত্যকা।", tags:"সভ্যতা civilization মেসোপটেমিয়া মিশর সিন্ধু কৃষি লেখা নগর"},
+  {url:"islami-akida.html", cat:"ধর্ম ও নীতি · উপ-বিষয়", title:"ইসলামের মূল বিশ্বাস", desc:"আকিদা ও ইবাদতের ভিত্তি। তাওহিদ, কুরআন, সুন্নাহ, পাঁচ স্তম্ভ।", tags:"ইসলাম islam তাওহিদ কুরআন সুন্নাহ নামাজ রোজা হজ্জ যাকাত শরিয়া"},
+  {url:"bangla-vasha.html", cat:"ভাষা · উপ-বিষয়", title:"বাংলা ভাষার ইতিহাস", desc:"হাজার বছরের মাতৃভাষার যাত্রা। চর্যাপদ, রবীন্দ্রনাথ, একুশে ফেব্রুয়ারি।", tags:"বাংলা ভাষা চর্যাপদ একুশ ফেব্রুয়ারি রবীন্দ্রনাথ মাতৃভাষা ইতিহাস"},
+  {url:"bangla-shahitto.html", cat:"শিল্প ও সংস্কৃতি · উপ-বিষয়", title:"বাংলা সাহিত্য", desc:"হাজার বছরের কাব্যের ধারা। রবীন্দ্রনাথ, নজরুল, কবিতা, উপন্যাস।", tags:"বাংলা সাহিত্য literature রবীন্দ্রনাথ নজরুল কবিতা উপন্যাস গল্প বাউল"},
+];
+
+function highlight(text, query) {
+  if (!query) return text;
+  const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+  return text.replace(re, '<mark class="ri-match">$1</mark>');
+}
+
+function search(q) {
+  const res = document.getElementById('results');
+  if (!q) { res.innerHTML = ''; return; }
+  const terms = q.toLowerCase().trim().split(/\s+/);
+  const hits = INDEX.filter(item => {
+    const hay = (item.title + ' ' + item.desc + ' ' + item.tags + ' ' + item.cat).toLowerCase();
+    return terms.every(t => hay.includes(t));
+  });
+  if (!hits.length) {
+    res.innerHTML = `<p class="empty">কোনো ফলাফল পাওয়া যায়নি।</p>`;
+    return;
+  }
+  res.innerHTML = hits.map(h => `
+    <a href="${h.url}" class="result-item">
+      <div class="ri-meta">${h.cat}</div>
+      <div class="ri-title">${highlight(h.title, q)}</div>
+      <div class="ri-desc">${highlight(h.desc, q)}</div>
+    </a>`).join('');
+}
+
+const inp = document.getElementById('searchInput');
+inp.addEventListener('input', () => search(inp.value));
+
+// parse ?q= from URL
+const urlQ = new URLSearchParams(location.search).get('q');
+if (urlQ) { inp.value = urlQ; search(urlQ); }
+</script>
+</body>
+</html>
