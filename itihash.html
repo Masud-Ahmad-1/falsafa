@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ইতিহাস — ফলসফা</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&family=Hind+Siliguri:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F4EEDD; --paper-deep: #ECE3CC; --ink: #221E18;
+    --ink-soft: #5B5142; --line: #CDBE9A; --gold: #9C7A3C; --maroon: #7A2E2E;
+  }
+  *{ box-sizing: border-box; }
+  html, body{ margin:0; padding:0; background:var(--paper); color:var(--ink); font-family:'Hind Siliguri',sans-serif; }
+  body{ background-image: radial-gradient(ellipse at top left, rgba(156,122,60,0.06), transparent 55%), radial-gradient(ellipse at bottom right, rgba(122,46,46,0.05), transparent 55%); }
+  .spine{ position:fixed; top:0; left:0; width:14px; height:100%; background:linear-gradient(180deg, var(--maroon), #5e2222 60%, var(--maroon)); box-shadow:2px 0 6px rgba(0,0,0,0.15) inset; z-index:10; }
+  @media (max-width:640px){ .spine{ width:8px; } }
+  .page{ max-width:760px; margin:0 auto; padding:56px 40px 80px; padding-left:64px; }
+  @media (max-width:640px){ .page{ padding:36px 22px 60px; padding-left:36px; } }
+  .catalog-row{ display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:18px; font-size:13px; letter-spacing:0.04em; color:var(--ink-soft); }
+  .catalog-row span.no{ font-variant-numeric:tabular-nums; border:1px solid var(--line); padding:3px 10px; border-radius:2px; background:var(--paper-deep); }
+  .breadcrumb{ font-size:13px; color:var(--ink-soft); margin-bottom:48px; }
+  .breadcrumb a{ color:var(--maroon); text-decoration:none; border-bottom:1px dotted var(--maroon); }
+  .breadcrumb a:hover{ opacity:0.75; }
+  .art-eyebrow{ font-size:13px; letter-spacing:0.18em; color:var(--gold); margin-bottom:14px; }
+  h1{ font-family:'Tiro Bangla',serif; font-size:clamp(40px,7vw,60px); line-height:1.1; font-weight:400; margin:0 0 18px; }
+  .subtitle{ font-family:'Tiro Bangla',serif; font-style:italic; font-size:19px; color:var(--maroon); margin:0 0 36px; }
+  .art-header{ border-bottom:1px dashed var(--line); padding-bottom:36px; margin-bottom:40px; }
+  .lede{ font-size:18px; line-height:1.95; color:var(--ink); margin-bottom:14px; }
+  .lede::first-letter{ font-family:'Tiro Bangla',serif; font-size:58px; float:left; line-height:0.8; padding:8px 10px 0 0; color:var(--maroon); }
+  p{ font-size:16.5px; line-height:1.9; color:var(--ink-soft); margin:0 0 22px; }
+  h2{ font-family:'Tiro Bangla',serif; font-weight:400; font-size:27px; color:var(--ink); margin:48px 0 16px; padding-top:6px; border-top:1px solid var(--line); }
+  .terms{ margin:28px 0 10px; border:1px solid var(--line); background:var(--paper-deep); border-radius:2px; }
+  .term{ display:grid; grid-template-columns:150px 1fr; gap:18px; padding:16px 20px; border-bottom:1px dashed var(--line); }
+  .term:last-child{ border-bottom:none; }
+  .term .name{ font-family:'Tiro Bangla',serif; font-size:18px; color:var(--maroon); }
+  .term .desc{ font-size:15px; line-height:1.8; color:var(--ink-soft); }
+  @media (max-width:560px){ .term{ grid-template-columns:1fr; gap:4px; } }
+  blockquote{ margin:36px 0; padding:4px 0 4px 22px; border-left:3px solid var(--maroon); font-family:'Tiro Bangla',serif; font-style:italic; font-size:19px; color:var(--ink); }
+  footer{ border-top:1px solid var(--line); padding-top:22px; margin-top:56px; font-size:13px; color:var(--ink-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+  footer a{ color:var(--maroon); text-decoration:none; border-bottom:1px dotted var(--maroon); }
+  .mark{ font-family:'Tiro Bangla',serif; font-style:italic; color:var(--gold); }
+
+  .other-chapters{ margin-top:52px; border-top:1px solid var(--line); padding-top:28px; }
+  .ch-section-label{ font-size:13px; letter-spacing:.14em; color:var(--ink-soft); margin:0 0 18px; }
+  .chapter-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; }
+  .ch-link{ display:flex; align-items:center; gap:10px; padding:12px 14px; background:var(--paper-deep); border:1px solid var(--line); border-radius:2px; text-decoration:none; color:var(--ink); transition:background .15s,transform .15s; }
+  .ch-link:hover{ background:var(--line); transform:translateY(-2px); }
+  .ch-link.active{ border-color:var(--maroon); background:rgba(122,46,46,.08); cursor:default; pointer-events:none; }
+  .ch-no{ font-size:11px; color:var(--gold); letter-spacing:.06em; flex-shrink:0; }
+  .ch-name{ font-family:'Tiro Bangla',serif; font-size:16px; }
+
+
+  .topbar{position:sticky;top:0;z-index:9;background:var(--paper-deep);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 40px 0 72px;height:48px;gap:16px;}
+  @media(max-width:640px){.topbar{padding:0 16px 0 28px;}}
+  .topbar-brand{font-family:'Tiro Bangla',serif;font-size:18px;color:var(--maroon);text-decoration:none;}
+  .topbar-links{display:flex;gap:20px;}
+  .topbar-links a{font-size:13px;color:var(--ink-soft);text-decoration:none;letter-spacing:.03em;border-bottom:1px dotted transparent;transition:color .15s,border-color .15s;}
+  .topbar-links a:hover,.topbar-links a.active{color:var(--maroon);border-bottom-color:var(--maroon);}
+  .topbar-search a{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--ink-soft);text-decoration:none;padding:4px 10px;border:1px solid var(--line);border-radius:20px;background:var(--paper);transition:background .15s;}
+  .topbar-search a:hover{background:var(--line);}
+  /* sub-topic links on chapter page */
+  .subtopics-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;}
+  .st-link{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--paper-deep);border:1px solid var(--line);border-radius:2px;text-decoration:none;color:var(--ink);font-size:14px;font-family:'Hind Siliguri',sans-serif;transition:background .14s,transform .12s;}
+  .st-link:hover{background:var(--line);transform:translateY(-2px);}
+  .st-no{font-size:11px;color:var(--gold);}
+
+
+  /* লেখার তালিকা (chapter page) */
+  .article-list{ display:flex; flex-direction:column; gap:12px; margin:20px 0 48px; }
+  .article-card{ display:flex; align-items:flex-start; gap:16px; padding:18px 20px; background:var(--paper-deep); border:1px solid var(--line); border-radius:2px; text-decoration:none; color:inherit; border-left:3px solid transparent; transition:border-color .15s,transform .12s,box-shadow .12s; }
+  .article-card:hover{ border-left-color:var(--maroon); transform:translateX(4px); box-shadow:0 4px 14px rgba(34,30,24,.09); }
+  .ac-no{ font-size:13px; color:var(--gold); letter-spacing:.08em; flex-shrink:0; padding-top:4px; min-width:20px; }
+  .ac-body{ display:flex; flex-direction:column; gap:4px; }
+  .ac-title{ font-family:'Tiro Bangla',serif; font-size:20px; color:var(--ink); }
+  .ac-subtitle{ font-size:13px; color:var(--maroon); font-style:italic; }
+  .ac-desc{ font-size:14px; color:var(--ink-soft); line-height:1.7; margin-top:2px; }
+  .ac-arrow{ margin-left:auto; font-size:18px; color:var(--line); padding-top:4px; flex-shrink:0; transition:color .15s; }
+  .article-card:hover .ac-arrow{ color:var(--maroon); }
+
+  /* prev/next nav (sub-topic page) */
+  .prevnext{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:44px; }
+  .prevnext a{ display:flex; flex-direction:column; padding:14px 16px; background:var(--paper-deep); border:1px solid var(--line); border-radius:2px; text-decoration:none; color:var(--ink); transition:background .14s,transform .12s; }
+  .prevnext a:hover{ background:var(--line); transform:translateY(-2px); }
+  .prevnext a.prev{ align-items:flex-start; }
+  .prevnext a.next{ align-items:flex-end; text-align:right; }
+  .prevnext a.solo{ grid-column:1/-1; align-items:center; text-align:center; }
+  .pn-dir{ font-size:11px; color:var(--gold); letter-spacing:.1em; margin-bottom:4px; }
+  .pn-title{ font-family:'Tiro Bangla',serif; font-size:17px; }
+
+
+  .article-list-section{ margin:36px 0 48px; }
+  .al-heading{ font-family:'Tiro Bangla',serif; font-weight:400; font-size:22px; color:var(--ink); margin:0 0 16px; padding-bottom:10px; border-bottom:1px solid var(--line); }
+  .article-list{ display:flex; flex-direction:column; gap:10px; }
+  .article-card{ display:flex; align-items:flex-start; gap:16px; padding:16px 18px; background:var(--paper-deep); border:1px solid var(--line); border-left:3px solid transparent; border-radius:2px; text-decoration:none; color:inherit; transition:border-left-color .15s,transform .12s,box-shadow .12s; }
+  .article-card:hover{ border-left-color:var(--maroon); transform:translateX(4px); box-shadow:0 4px 14px rgba(34,30,24,.09); }
+  .ac-no{ font-size:13px; color:var(--gold); letter-spacing:.08em; flex-shrink:0; padding-top:3px; min-width:18px; }
+  .ac-body{ display:flex; flex-direction:column; gap:3px; flex:1; }
+  .ac-title{ font-family:'Tiro Bangla',serif; font-size:19px; color:var(--ink); }
+  .ac-sub{ font-size:12.5px; color:var(--maroon); font-style:italic; }
+  .ac-desc{ font-size:13.5px; color:var(--ink-soft); line-height:1.7; margin-top:2px; }
+  .ac-arrow{ font-size:18px; color:var(--line); flex-shrink:0; padding-top:2px; transition:color .15s,transform .15s; }
+  .article-card:hover .ac-arrow{ color:var(--maroon); transform:translateX(3px); }
+
+
+  /* ── reading time ── */
+  .read-time { display:inline-flex; align-items:center; gap:6px; font-size:12.5px; color:var(--ink-soft); background:var(--paper-deep); border:1px solid var(--line); border-radius:20px; padding:3px 12px; margin-bottom:20px; }
+  .read-time-icon { font-size:13px; }
+
+  /* ── পরের পাঠ ── */
+  .next-lesson { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:44px; padding:20px 24px; background:var(--paper-deep); border:1px solid var(--line); border-radius:2px; text-decoration:none; color:inherit; position:relative; overflow:hidden; transition:box-shadow .15s,transform .12s; }
+  .next-lesson::before { content:''; position:absolute; top:0; right:0; width:4px; height:100%; background:var(--maroon); }
+  .next-lesson:hover { transform:translateX(-3px); box-shadow:-4px 4px 16px rgba(34,30,24,.1); }
+  .nl-label { font-size:11px; letter-spacing:.14em; color:var(--gold); margin-bottom:5px; }
+  .nl-cat { font-size:11px; color:var(--ink-soft); margin-bottom:3px; }
+  .nl-title { font-family:'Tiro Bangla',serif; font-size:20px; color:var(--ink); }
+  .nl-arrow { font-size:28px; color:var(--line); flex-shrink:0; transition:color .15s,transform .15s; }
+  .next-lesson:hover .nl-arrow { color:var(--maroon); transform:translateX(4px); }
+
+  @media print {
+    .spine, .topbar, .other-chapters, .chapter-grid,
+    .related, .prevnext, .next-lesson, .article-list-section,
+    .subtopics-bar, .feat-link, .breadcrumb { display:none !important; }
+    body { background:white; color:black; font-size:12pt; }
+    .page { padding:0; max-width:100%; }
+    h1 { font-size:24pt; }
+    h2 { font-size:16pt; page-break-after:avoid; }
+    p { font-size:11pt; line-height:1.7; orphans:3; widows:3; }
+    blockquote { border-left:2px solid #999; color:#333; }
+    .terms { border:1px solid #ccc; }
+    .term { border-bottom:1px solid #eee; }
+    a { color:inherit; text-decoration:none; }
+    .read-time { color:#666; font-size:10pt; }
+    @page { margin:2cm; }
+  }
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="topbar-brand" href="index.html">ফলসফা</a>
+  <nav class="topbar-links">
+    <a href="index.html">সূচি</a>
+    <a href="about.html">পরিচয়</a>
+  </nav>
+  <div class="topbar-search">
+    <a href="search.html">🔍 খুঁজুন</a>
+  </div>
+</header>
+
+  <div class="spine" aria-hidden="true"></div>
+  <main class="page">
+    <div class="catalog-row">
+      <span>ফলসফা গ্রন্থাগার</span>
+      <span class="no">শাখা ০৩</span>
+    </div>
+    <p class="breadcrumb"><a href="index.html">← সূচিতে ফিরুন</a></p>
+
+    <header class="art-header">
+      <p class="art-eyebrow">জ্ঞানের শাখা</p>
+      <h1>ইতিহাস</h1>
+      <p class="subtitle">অতীতকে বোঝার শৃঙ্খলা</p>
+    </header>
+
+    <p class="lede">
+      ইতিহাস শুধু তারিখ আর ঘটনার তালিকা নয় — এটি অতীতের প্রমাণ ঘেঁটে বর্তমানকে বোঝার একটি
+      পদ্ধতি। কেন একটি সভ্যতা গড়ে উঠল, কেন আরেকটি ভেঙে পড়ল — এই প্রশ্নের উত্তর খুঁজতে গিয়ে
+      ইতিহাস আমাদের নিজেদের অবস্থানও স্পষ্ট করে দেয়।
+    </p>
+
+    <p>
+      প্রতিটি ইতিহাস লেখা হয় কারো না কারো দৃষ্টিকোণ থেকে — তাই উৎস যাচাই, প্রমাণের তুলনা ও
+      পক্ষপাত চেনা ইতিহাসচর্চার একটি অপরিহার্য অংশ। একই ঘটনার একাধিক বিবরণ থাকা স্বাভাবিক;
+      প্রকৃত ইতিহাসবিদের কাজ সেগুলোর মধ্যে সবচেয়ে নির্ভরযোগ্য চিত্রটি খুঁজে বের করা।
+    </p>
+
+    <blockquote>
+      যে নিজের ইতিহাস জানে না, সে বর্তমানকেও পুরোপুরি বুঝতে পারে না।
+    </blockquote>
+
+    <h2>ইতিহাসচর্চার প্রধান ক্ষেত্র</h2>
+    <p>
+      অতীতকে নানা কোণ থেকে দেখার জন্য ইতিহাসচর্চা কয়েকটি ক্ষেত্রে ভাগ হয়েছে।
+    </p>
+
+    <div class="terms">
+      <div class="term">
+        <span class="name">প্রত্নতত্ত্ব</span>
+        <span class="desc">মাটির নিচে চাপা পড়া নিদর্শন খুঁড়ে অতীতের জীবনযাত্রা পুনর্গঠন করে।</span>
+      </div>
+      <div class="term">
+        <span class="name">রাজনৈতিক ইতিহাস</span>
+        <span class="desc">রাষ্ট্র, শাসন ও ক্ষমতার পরিবর্তনের ধারাবাহিকতা নিয়ে আলোচনা করে।</span>
+      </div>
+      <div class="term">
+        <span class="name">সামাজিক ইতিহাস</span>
+        <span class="desc">সাধারণ মানুষের জীবনযাপন, সমাজব্যবস্থা ও পরিবর্তনের ইতিহাস তুলে ধরে।</span>
+      </div>
+      <div class="term">
+        <span class="name">ইতিহাসবিদ্যা</span>
+        <span class="desc">ইতিহাস কীভাবে লেখা ও ব্যাখ্যা করা হয় — সেই পদ্ধতি নিয়ে আত্ম-পর্যালোচনা।</span>
+      </div>
+      <div class="term">
+        <span class="name">সাংস্কৃতিক ইতিহাস</span>
+        <span class="desc">ভাষা, ধর্ম, শিল্প ও বিশ্বাসের বিবর্তন কীভাবে সমাজ গড়েছে, তা পরীক্ষা করে।</span>
+      </div>
+    </div>
+
+    <h2>কেন এখনো প্রাসঙ্গিক</h2>
+    <p>
+      বর্তমানের অনেক বিরোধ, সীমান্ত-সমস্যা বা সামাজিক কাঠামোর শিকড় লুকিয়ে আছে অতীতে।
+      ইতিহাস বোঝা মানে শুধু পুরোনো গল্প জানা নয় — বর্তমান সিদ্ধান্তের প্রেক্ষাপট বোঝার
+      একটি অপরিহার্য হাতিয়ার।
+    </p>
+
+  <div class="article-list-section">
+    <p class="al-heading">এই শাখার লেখাসমূহ</p>
+    <div class="article-list">
+      <a href="shobhyotar-utso.html" class="article-card">
+        <span class="ac-no">ক</span>
+        <div class="ac-body">
+          <span class="ac-title">সভ্যতার উৎস</span>
+          <span class="ac-sub">মানবজাতির প্রথম অধ্যায়</span>
+          <span class="ac-desc">মেসোপটেমিয়া, মিশর ও সিন্ধু উপত্যকার গল্প।</span>
+        </div>
+        <span class="ac-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+    <footer>
+      <span><span class="mark">ফলসফা</span> — জ্ঞানের গোড়াপত্তন</span>
+      <a href="index.html">← সূচিতে ফিরুন</a>
+    </footer>
+  </main>
+</body>
+</html>
